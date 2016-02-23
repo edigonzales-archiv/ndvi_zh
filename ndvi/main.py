@@ -20,19 +20,11 @@ def main():
     logging.basicConfig(filename = opts.logfile, filemode = "w", format = FORMAT, level = logging.DEBUG)
     logging.getLogger().addHandler(logging.StreamHandler())
 
-    # Init qgis
+    # Init QGIS
     app = QApplication(sys.argv)
     QgsApplication.setPrefixPath("/usr/local/qgis_master", True)
     QgsApplication.initQgis()
     QgsApplication.showSettings()
-    #qgs = QgsApplication(sys.argv, False)
-    #qgs.initQgis()
-
-    vlayer = QgsVectorLayer("/home/stefan/Downloads/2549/Liegenschaften__Liegenschaft.shp", "Liegenschaften__Liegenschaft", "ogr")
-    if not vlayer.isValid():
-        print "Layer failed to load!"
-
-    print vlayer.extent().asPolygon()
 
     #Load CIR orthofoto
     fileName = "/home/stefan/Downloads/1091-231.tif"
@@ -44,8 +36,19 @@ def main():
 
     print "************"
     print rlayer.width()
+    print rlayer.bandCount()
+    print rlayer.metadata()
+    print rlayer.rasterType()
+    print rlayer.dataProvider().colorTable(1)
     print "************"
 
+    entries = []
+    # Define band1
+    boh1 = QgsRasterCalculatorEntry()
+    boh1.ref = 'boh@1'
+    boh1.raster = rlayer
+    boh1.bandNumber = 1
+    entries.append( boh1 )
 
 
 
@@ -53,4 +56,5 @@ def main():
 if __name__ == '__main__':
     sys.exit(main())
 
+# Exit QGIS
 QgsApplication.exitQgis()
