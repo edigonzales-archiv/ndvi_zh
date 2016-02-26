@@ -24,7 +24,6 @@ def main():
     app = QApplication(sys.argv)
     QgsApplication.setPrefixPath("/usr/local/qgis_master", True)
     QgsApplication.initQgis()
-    QgsApplication.showSettings()
 
     #Load CIR orthofoto
     fileName = "/home/stefan/Downloads/1091-231.tif"
