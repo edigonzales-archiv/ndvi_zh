@@ -2,8 +2,8 @@
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/qgis_master/lib/
 export PYTHONPATH=$PYTHONPATH:/usr/local/qgis_master/share/qgis/python
 
-#export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/gdal_master/lib/
-#export PYTHONPATH=$PYTHONPATH:/usr/local/gdal_master/lib/python2.7/site-packages/GDAL-2.1.0-py2.7-linux-x86_64.egg
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/gdal_master/lib/
+export PYTHONPATH=$PYTHONPATH:/usr/local/gdal_master/lib/python2.7/site-packages/GDAL-2.1.0-py2.7-linux-x86_64.egg
 
 BINPATH=`dirname $0`
 python "$BINPATH/../ndvi/main.py" $@

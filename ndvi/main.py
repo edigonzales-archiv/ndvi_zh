@@ -37,21 +37,29 @@ def main():
     print "************"
     print rlayer.width()
     print rlayer.bandCount()
-    print rlayer.metadata()
-    print rlayer.rasterType()
-    print rlayer.dataProvider().colorTable(1)
+    #print rlayer.metadata()
+    #print rlayer.rasterType()
+    #print rlayer.dataProvider().colorTable(1)
     print "************"
 
+    # Define an alias for each band in form of a QgsRasterCalculatorEntry.
     entries = []
-    # Define band1
-    boh1 = QgsRasterCalculatorEntry()
-    boh1.ref = 'boh@1'
-    boh1.raster = rlayer
-    boh1.bandNumber = 1
-    entries.append( boh1 )
 
+    band1 = QgsRasterCalculatorEntry()
+    band1.ref = 'cir@1'
+    band1.raster = rlayer
+    band1.bandNumber = 1
+    entries.append(band1)
 
+    band2 = QgsRasterCalculatorEntry()
+    band2.ref = 'cir@2'
+    band2.raster = rlayer
+    band2.bandNumber = 2
+    entries.append(band2)
 
+    # Process calculation with input extent and resolution
+    calc = QgsRasterCalculator('(cir@1 - cir@2) / (cir@1 + cir@2)', '/home/stefan/Downloads/1091-231_ndvi.tif', 'GTiff', rlayer.extent(), rlayer.width(), rlayer.height(), entries)
+    calc.processCalculation()
 
 if __name__ == '__main__':
     sys.exit(main())
